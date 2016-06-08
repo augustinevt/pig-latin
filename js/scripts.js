@@ -2,24 +2,45 @@
 
 function checkVowel(word) {
   var vowels = ['a','e','i','o','u'];
-  var match = false;
+  var match = [false, false]
+  var firstLetter = word.charAt(0);
+  var secondLetter = word.charAt(1);
+  var thirdLetter = word.charAt(2);
+  debugger;
   vowels.forEach(function(vowel) {
     console.log(vowel + "  " + word.charAt(0) )
-    if (word.charAt(0) === vowel) {
+    if ((firstLetter === "q") && (secondLetter === "u")){
+      alert('qu!');
+      match[0] = "q-case";
+    } else if ((secondLetter === "q") && (thirdLetter === "u")){
+      match[1] = "q-case";
+    } else if (firstLetter === vowel) {
       alert('worked!');
-      match = true;
+      match[0] = true;
+    } else if (secondLetter === vowel){
+      alert('worked!');
+      match[0] = true;
     }
   });
   return match;
 }
 
 function addAy(word, match) {
-  if (match === false){
+  if (match[0] === "q-case"){
+    console.log("first two letters are qu");
+  } else if (match[1] === "q-case"){
+    console.log("second two letters are qu");
+
+  } else if (match[0] === false){
     var firstLetter = word.charAt(0);
     var restOfWord = word.substring(1);
     var ayResult = restOfWord.concat(firstLetter + "ay");
     console.log(ayResult);
+  } else {
+    var ayResult = word.concat("ay");
+    console.log(ayResult);
   }
+  return ayResult;
 }
 
 
