@@ -6,11 +6,9 @@ function checkVowel(word) {
   var firstLetter = word.charAt(0);
   var secondLetter = word.charAt(1);
   var thirdLetter = word.charAt(2);
-  debugger;
+  // debugger;
   vowels.forEach(function(vowel) {
-    console.log(vowel + "  " + word.charAt(0) )
     if ((firstLetter === "q") && (secondLetter === "u")){
-      alert('qu!');
       match[0] = "q-case";
     } else if ((secondLetter === "q") && (thirdLetter === "u")){
       match[1] = "q-case";
@@ -26,19 +24,31 @@ function checkVowel(word) {
 }
 
 function addAy(word, match) {
-  if (match[0] === "q-case"){
-    console.log("first two letters are qu");
-  } else if (match[1] === "q-case"){
-    console.log("second two letters are qu");
 
+  var firstTwoLetters;
+  var firstThreeLetters;
+  var firstLetter;
+  var ayResult;
+  var restOfWord;
+
+  if (match[0] === "q-case"){
+    firstTwoLetters = word.slice(0,2);
+    restOfWord = word.substring(2);
+    ayResult = restOfWord.concat(firstTwoLetters + "ay");
+  } else if (match[1] === "q-case"){
+    firstThreeLetters = word.slice(0,3);
+    restOfWord = word.substring(3);
+    ayResult = restOfWord.concat(firstThreeLetters + "ay");
+  } else if ((match[0] === false) && (match[1] === false)){
+    firstTwoLetters = word.slice(0,2);
+    restOfWord = word.substring(2);
+    ayResult = restOfWord.concat(firstTwoLetters + "ay");
   } else if (match[0] === false){
-    var firstLetter = word.charAt(0);
-    var restOfWord = word.substring(1);
-    var ayResult = restOfWord.concat(firstLetter + "ay");
-    console.log(ayResult);
+    firstLetter = word.charAt(0);
+    restOfWord = word.substring(1);
+    ayResult = restOfWord.concat(firstLetter + "ay");
   } else {
-    var ayResult = word.concat("ay");
-    console.log(ayResult);
+    ayResult = word.concat("ay");
   }
   return ayResult;
 }
@@ -55,9 +65,10 @@ $(document).ready(function(){
 
     addAy(userInput, result);
 
+
     // debugger;
 
-    $(".output").text(result);
+    $(".output").text(addAy(userInput, result));
 
     $("#result").show();
 
