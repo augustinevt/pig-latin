@@ -1,0 +1,8 @@
+.container {
+  text-align: center;
+}
+
+#result {
+  margin-top: 5vw;
+  display: none;
+}

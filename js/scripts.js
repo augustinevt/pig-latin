@@ -1,5 +1,24 @@
 ///business logic
 
+function sentenceProcessor(sentence){
+
+  debugger;
+
+  var words = sentence.toLowerCase().split(" ");
+  var counter = 0;
+
+  words.forEach(function(word) {
+    words[counter] = addAy(word, checkVowel(word));
+    counter++;
+  });
+
+
+
+  return words.join(" ");
+
+}
+
+
 function checkVowel(word) {
   var vowels = ['a','e','i','o','u'];
   var match = [false, false]
@@ -13,10 +32,8 @@ function checkVowel(word) {
     } else if ((secondLetter === "q") && (thirdLetter === "u")){
       match[1] = "q-case";
     } else if (firstLetter === vowel) {
-      alert('worked!');
       match[0] = true;
     } else if (secondLetter === vowel){
-      alert('worked!');
       match[0] = true;
     }
   });
@@ -30,7 +47,7 @@ function addAy(word, match) {
   var firstLetter;
   var ayResult;
   var restOfWord;
-
+  debugger;
   if (match[0] === "q-case"){
     firstTwoLetters = word.slice(0,2);
     restOfWord = word.substring(2);
@@ -43,7 +60,7 @@ function addAy(word, match) {
     firstTwoLetters = word.slice(0,2);
     restOfWord = word.substring(2);
     ayResult = restOfWord.concat(firstTwoLetters + "ay");
-  } else if (match[0] === false){
+  } else if (match[0] === true){
     firstLetter = word.charAt(0);
     restOfWord = word.substring(1);
     ayResult = restOfWord.concat(firstLetter + "ay");
@@ -59,16 +76,21 @@ $(document).ready(function(){
   $("form#pig-latin").submit(function(event) {
     event.preventDefault();
 
-    var userInput = $("input#input").val();
+    var userInput = $("textarea#input").val();
 
-    var result = checkVowel(userInput);
+    var result = sentenceProcessor(userInput);
 
-    addAy(userInput, result);
+    // var result = checkVowel(userInput);
+
+    // addAy(userInput, result);
 
 
     // debugger;
 
-    $(".output").text(addAy(userInput, result));
+    // $(".output").text(addAy(userInput, result));
+
+    $(".output").text(result);
+
 
     $("#result").show();
 
